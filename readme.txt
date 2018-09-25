@@ -1,3 +1,11 @@
 Terraform Commands(secret.tfvars contains aws secrets and is not checked in):
-terraform plan -var-file ../../secret.tfvars
-terraform apply -var-file ../../secret.tfvars
+AWS
+terraform plan -var-file ../../secret_aws.tfvars
+terraform apply -var-file ../../secret_aws.tfvars
+
+OPENSTACK
+terraform plan -var-file ../../secret_openstack.tfvars
+terraform apply -var-file ../../secret_openstack.tfvars
+
+
+

@@ -2,7 +2,7 @@
 variable "user_name" {}
 variable "password" {}
 variable "private_key_path" {}
-variable "key_name" {
+variable "key_pair" {
   default = "dev_uex_otv_ciaas_ssh_key"
 }
 variable "security_group" {
@@ -24,10 +24,11 @@ provider "openstack" {
 
 #RESOURCES
 resource "openstack_compute_instance_v2" "kube-node" {
-  ami           = "f2b673cf-adf6-4ed6-a656-023787e08711"
+  name          = "test-instance"
+  image_id      = "f2b673cf-adf6-4ed6-a656-023787e08711"
   count         = 1
-  instance_type = "c4.large"
-  key_name      = "${var.key_name}"
+  flavor_name = "c4.large"
+  key_pair      = "${var.key_pair}"
 }
 
 
