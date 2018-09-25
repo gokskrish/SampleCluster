@@ -182,7 +182,7 @@ resource "aws_instance" "master" {
   }
 }
 
-/*
+
 # Define kube node-1 inside the public subnet
 resource "aws_instance" "node-1" {
   ami  = "${var.ami}"
@@ -236,7 +236,7 @@ resource "aws_instance" "node-2" {
     Name = "kube-node-2"
   }
 }
-
+/*
 # Define utility-server inside the public subnet
 resource "aws_instance" "util" {
   ami  = "${var.ami}"
@@ -268,4 +268,10 @@ resource "aws_instance" "util" {
 #OUTPUT
 output "master_ip" {
   value = "${aws_instance.master.public_ip}"
+}
+output "node_1" {
+  value = "${aws_instance.node-1.public_ip}"
+}
+output "node_2" {
+  value = "${aws_instance.node-2.public_ip}"
 }
