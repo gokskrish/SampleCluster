@@ -198,12 +198,12 @@ resource "aws_instance" "node-1" {
     private_key = "${file(var.private_key_path)}"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get upgrade -y"
-    ]
-  }
+//  provisioner "remote-exec" {
+//    inline = [
+//      "sudo apt-get update",
+//      "sudo apt-get upgrade -y"
+//    ]
+//  }
 
   tags {
     Name = "kube-node-1"
@@ -225,12 +225,12 @@ resource "aws_instance" "node-2" {
     private_key = "${file(var.private_key_path)}"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get upgrade -y"
-    ]
-  }
+//  provisioner "remote-exec" {
+//    inline = [
+//      "sudo apt-get update",
+//      "sudo apt-get upgrade -y"
+//    ]
+//  }
 
   tags {
     Name = "kube-node-2"
@@ -252,12 +252,12 @@ resource "aws_instance" "util" {
     private_key = "${file(var.private_key_path)}"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get upgrade -y"
-    ]
-  }
+//  provisioner "remote-exec" {
+//    inline = [
+//      "sudo apt-get update",
+//      "sudo apt-get upgrade -y"
+//    ]
+//  }
 
   tags {
     Name = "util-server"
