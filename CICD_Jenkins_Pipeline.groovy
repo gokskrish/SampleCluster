@@ -28,6 +28,14 @@ pipeline {
                         dir("SampleCluster/terraform_infra/aws/") {
                             sh "/opt/terraform/terraform init"
                             sh "/opt/terraform/terraform apply -var-file /home/gokskrish/aws/secret_aws.tfvars -state /tmp/terraform_aws.tfstate -auto-approve"
+
+                            def master_ip=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate master_ip", returnStdout: true).trim();
+                            def node_1=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate node_1", returnStdout: true).trim();
+                            def node_2=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate node_2", returnStdout: true).trim();
+
+                            def fileContent = "[master]\n${master_ip}\n[nodes]\n${node_1}\n${node_2}\n[util]";
+
+                            writeFile file: '../../../hosts', text: "${fileContent}"
                         }
                     } else if (create_compute == "destroy") {
                         dir("SampleCluster/terraform_infra/aws/") {
@@ -44,32 +52,15 @@ pipeline {
         }
     }//Stage
 
-        stage('Prepare Inventory') {
-            steps {
-                echo "Prepare Ansible Inventory";
-                script {
-                    dir("SampleCluster/terraform_infra/aws/") {
-                        def master_ip=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate master_ip", returnStdout: true).trim();
-                        def node_1=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate node_1", returnStdout: true).trim();
-                        def node_2=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate node_2", returnStdout: true).trim();
-
-                        def fileContent = "[master]\n${master_ip}\n[nodes]\n${node_1}\n${node_2}\n[util]";
-
-                        writeFile file: '../../../hosts', text: "${fileContent}"
-                    }
-                }
-            }
-        }//Stage
-
         stage('Configure Kubernetes') {
             steps {
-                echo "Configure Kubernetes";
+                echo "TODO:Configure Kubernetes";
             }
         }//Stage
 
         stage('Deploy Applications') {
             steps {
-                echo "Deploy Applications";
+                echo "TODO:Deploy Applications";
             }
         }//Stage
 
