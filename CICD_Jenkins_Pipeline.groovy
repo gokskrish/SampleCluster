@@ -53,9 +53,9 @@ pipeline {
                         def node_1=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate node_1", returnStdout: true).trim();
                         def node_2=sh(script: "/opt/terraform/terraform output -state /tmp/terraform_aws.tfstate node_2", returnStdout: true).trim();
 
-                        def fileContent = "[master]\n${master_ip}\n\n[nodes]${node_1}\n${node_2}\n\n[util]";
+                        def fileContent = "[master]\n${master_ip}\n[nodes]\n${node_1}\n${node_2}\n[util]";
 
-                        writeFile file: 'SampleCluster/hosts', text: "${fileContent}"
+                        writeFile file: '../../../hosts', text: "${fileContent}"
                     }
                 }
             }
