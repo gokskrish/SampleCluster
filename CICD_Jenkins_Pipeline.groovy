@@ -35,7 +35,7 @@ pipeline {
 
                             def fileContent = "[master]\n${master_ip}\n[nodes]\n${node_1}\n${node_2}\n[util]";
 
-                            writeFile file: '../../../hosts', text: "${fileContent}"
+                            writeFile file: '../../hosts.ini', text: "${fileContent}"
                         }
                     } else if (create_compute == "destroy") {
                         dir("SampleCluster/terraform_infra/aws/") {
